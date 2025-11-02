@@ -17,10 +17,13 @@ public class RoadCheckpoint : MonoBehaviour
     // Check to see if this collider is the truck - If so, move the road forward!
     void OnTriggerEnter(Collider collider)
     {
+        Debug.Log("Hit Something...");
         if (collider.gameObject.tag == "Truck" && !hit)
         {
+            Debug.Log("   Hit the truck");
             hit = true;
             roadGen.NextRoadPiece(transform.parent.gameObject);
         }
+
     }
 }

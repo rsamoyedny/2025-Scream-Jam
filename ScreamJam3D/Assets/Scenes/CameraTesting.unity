@@ -2136,6 +2136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4ef34c261f8b9448b33ba16612c091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CameraLookState: 0
   frames:
   - direction: 1
     bounds:
