@@ -4546,9 +4546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f7ce48a6426c84c8693324674b19a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRoadPieces: 3
+  maxRoadPieces: 2
   maxRoadAngle: 1
-  maxRoadPiecesBehindPlayer: 1
+  maxRoadPiecesBehindPlayer: 0
   truckTransform: {fileID: 1153914279}
   roadParent: {fileID: 1208427233}
   roadPieces:
