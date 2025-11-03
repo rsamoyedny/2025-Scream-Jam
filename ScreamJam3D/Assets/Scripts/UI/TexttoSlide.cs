@@ -31,7 +31,7 @@ public class TexttoSlide : MonoBehaviour
         if (num.Length > 0)
         {
             slide.value = float.Parse(num);
-            mixer.audioMixer.SetFloat("Volume", (slide.value / 100 * 80 - 80));
+            mixer.audioMixer.SetFloat("MasterVolume", (slide.value / 100 * 80 - 80));
             PlayerPrefs.SetFloat("volume", slide.value);
         }
     }
@@ -39,7 +39,7 @@ public class TexttoSlide : MonoBehaviour
     public void SendToText(float num)
     {
         text.text = num + "";
-        mixer.audioMixer.SetFloat("Volume", (num / 100 * 80 - 80));
+        mixer.audioMixer.SetFloat("MasterVolume", (num / 100 * 80 - 80));
         PlayerPrefs.SetFloat("volume", num);
     }
 }
