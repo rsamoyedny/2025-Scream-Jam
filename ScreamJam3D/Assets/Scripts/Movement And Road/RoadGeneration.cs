@@ -22,6 +22,9 @@ public class RoadGeneration : MonoBehaviour
     // Current road direction, used to stop intersection
     private float angle;
 
+    // Initial offset Vector
+    private Vector3 _initialOffset = new(0,-4,10);
+
     // Place 1st road piece, create more as needed to fill list
     void Start()
     {
@@ -93,7 +96,7 @@ public class RoadGeneration : MonoBehaviour
             if (placedRoad.Count == 1)
             {
                 Transform spawn = GetTransform(newRoadTransform, "Spawn");
-                roadParent.position = truckTransform.position + Vector3.down * 4 + (newRoadTransform.position - spawn.position);
+                roadParent.position = truckTransform.position + _initialOffset + (newRoadTransform.position - spawn.position);
             }
             // Otherwise, place new piece such that its connected aligns with the previous piece's pivot
             else
