@@ -40,7 +40,7 @@ public class RotateCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(CameraManager.Instance.CameraLookState);
+        
     }
 
     void OnDestroy()

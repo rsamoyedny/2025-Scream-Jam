@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 796fb50570544364e818f7bb871af705, type: 3}
+  m_Name: Straight Props
+  m_EditorClassIdentifier: 
+  propPrefabs:
+  - {fileID: 9220867129489594922, guid: c05d5389217f2e04bbbd10d9365657e0, type: 3}
