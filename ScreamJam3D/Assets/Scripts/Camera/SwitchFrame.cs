@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class SwitchFrame : MonoBehaviour, IMouseInteract
@@ -8,6 +9,12 @@ public class SwitchFrame : MonoBehaviour, IMouseInteract
     public PlayerLookState targetFrame;
 
     private bool _touchBuffer = true;
+
+    private bool OutOfBounds(Vector2 pos) => 
+        bounds.minX > pos.x || 
+        bounds.maxX < pos.x || 
+        bounds.minZ > pos.y || 
+        bounds.maxZ < pos.y;
 
     void Awake()
     {
@@ -36,66 +43,38 @@ public class SwitchFrame : MonoBehaviour, IMouseInteract
 
     public void OnMouseMove(Vector2 mousePos)
     {
-        if (!enabled) return;
+        if (this == null || !enabled) return;
 
-        if (PlayerPrefs.GetInt("ClickRotate", 0) == 0)
+        if (PlayerPrefs.GetInt("ClickRotate", 0) != 0) return;
+        if (SteeringWheelControls.IsBeingSpun) return;
+
+        if (OutOfBounds(mousePos))
         {
-            bool canRotate = true;
-
-            if (SteeringWheelControls.Instance != null)
-            {
-                if (SteeringWheelControls.Instance.AngleToVertical != 0)
-                    canRotate = false;
-            }
-
-            if (canRotate)
-            {
-                if (bounds.minX > mousePos.x || bounds.maxX < mousePos.x || bounds.minZ > mousePos.y || bounds.maxZ < mousePos.y)
-                {
-                    _touchBuffer = false;
-                }
-                else if (!_touchBuffer)
-                {
-                    CameraManager.Instance.CurrentLookState = targetFrame;
-                }
-            }
+            _touchBuffer = false;
+        }
+        else if (!_touchBuffer)
+        {
+            CameraManager.Instance.CurrentLookState = targetFrame;
         }
     }
 
     public void OnPress(Vector2 mousePos)
     {
-        if (!enabled) return;
+        if (this == null || !enabled) return;
+        if (PlayerPrefs.GetInt("ClickRotate", 0) != 1) return;
+        if (SteeringWheelControls.IsBeingSpun) return;
 
-        if (PlayerPrefs.GetInt("ClickRotate", 0) == 1)
+
+        if (OutOfBounds(mousePos))
         {
-            bool canRotate = true;
-
-            if (SteeringWheelControls.Instance != null)
-            {
-                if (SteeringWheelControls.Instance.AngleToVertical != 0)
-                    canRotate = false;
-            }
-
-            if (canRotate)
-            {
-                if (!(bounds.minX > mousePos.x || bounds.maxX < mousePos.x || bounds.minZ > mousePos.y || bounds.maxZ < mousePos.y))
-                {
-                    CameraManager.Instance.CurrentLookState = targetFrame;
-                }
-            }
+            return;
         }
+        CameraManager.Instance.CurrentLookState = targetFrame;
     }
 
     public void OnDrawGizmosSelected()
     {
-        if (targetFrame == PlayerLookState.None)
-        {
-            Gizmos.color = Color.red;
-        }
-        else
-        {
-            Gizmos.color = Color.white;
-        }
+        Gizmos.color = targetFrame == PlayerLookState.None ? Color.red : Color.white;
 
         Bounds2D shiftedBounds = ConvertToPercentBounds(bounds);
 

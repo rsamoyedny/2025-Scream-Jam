@@ -50,6 +50,8 @@ public class SteeringWheelControls : MonoBehaviour, IMouseInteract
     /// </summary>
     public float AngleToVertical { get; private set; }
 
+    public static bool IsBeingSpun => Instance != null && Instance.AngleToVertical != 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -92,7 +94,7 @@ public class SteeringWheelControls : MonoBehaviour, IMouseInteract
         originalDirection = 0f;
         IsWheelMoving = false;
 
-        if (SteeringWheelControls.Instance != null)
+        if (Instance != null)
         {
             StartCoroutine(ResetRotation());
         }

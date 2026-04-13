@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,20 +34,27 @@ public class CameraManager : MonoBehaviour
 
     public Bounds2D DisplayBounds => _displayBounds;
 
-    // Singleton Implementation
     public static CameraManager Instance;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+        // if (Instance == null)
+        // {
+        //     Debug.Log(gameObject.name);
+        //     Instance = this;
+        //     DontDestroyOnLoad(gameObject);
+        // }
+        // else
+        // {
+        //     Destroy(gameObject);
+        // }
+    }
+
+    void OnDestroy()
+    {
+        InputSystem.actions["Attack"].performed -= OnMouseClick;
+        InputSystem.actions["Look"].performed -= OnMouseMove;
     }
 
     public List<FrameBounds> frames = new();
