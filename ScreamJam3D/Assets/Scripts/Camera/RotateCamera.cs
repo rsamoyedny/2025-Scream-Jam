@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class RotateCamera : MonoBehaviour
 {
-
     [Serializable]
     private struct RotationNamePair
     {
